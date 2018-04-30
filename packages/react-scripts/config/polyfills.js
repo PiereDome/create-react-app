@@ -28,3 +28,10 @@ Object.assign = require('object-assign');
 if (process.env.NODE_ENV === 'test') {
   require('raf').polyfill(global);
 }
+
+// i3Logix - Added for jest tests as jsdom doesn't provide matchMedia yet.
+if (process.env.NODE_ENV === 'test') {
+  window.matchMedia = function() {
+    return { matches: global.matchMediaValue || false };
+  };
+}
